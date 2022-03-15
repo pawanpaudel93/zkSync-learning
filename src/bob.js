@@ -6,6 +6,7 @@ const utils = require("./utils");
   const SLEEP_INTERVAL = process.env.SLEEP_INTERVAL || 5000;
   const zkSyncProvider = await utils.getZkSyncProvider(networkName);
   const ethersProvider = await utils.getEthereumProvider(networkName);
+  const tokenSet = zkSyncProvider.tokenSet;
 
   const bobRinkebyWallet = new ethers.Wallet(
     process.env.BOB_PRIVATE_KEY,
@@ -29,7 +30,7 @@ const utils = require("./utils");
   });
 
   setInterval(async () => {
-    await utils.displayZkSyncBalance(bobZkSyncWallet);
+    await utils.displayZkSyncBalance(bobZkSyncWallet, tokenSet);
     console.log("---");
   }, SLEEP_INTERVAL);
 })();
